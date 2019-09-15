@@ -12,5 +12,6 @@ public class Server {
 		Remote skeleton = UnicastRemoteObject.exportObject(carBase, 8080);
 		Registry registry = LocateRegistry.getRegistry(1099);
 		registry.rebind("CarBase", skeleton);
+		System.out.println("Server running");
 	}
 }
