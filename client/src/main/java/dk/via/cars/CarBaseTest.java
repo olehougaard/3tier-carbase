@@ -24,9 +24,9 @@ public class CarBaseTest {
 	@Test
 	public void test() throws RemoteException {
 		Money eur = new Money(new BigDecimal("4999.99"), "EUR");
-		Car car = carBase.getCar("AV 41 213");
-		car.setPrice(eur);
-		List<Car> allCars = carBase.getAllCars();
+		CarDTO car = carBase.getCar("AV 41 213");
+		carBase.setPrice(car, eur);
+		List<CarDTO> allCars = carBase.getAllCars();
 		assertEquals(1, allCars.size());
 		assertEquals(eur, allCars.get(0).getPrice());
 	}

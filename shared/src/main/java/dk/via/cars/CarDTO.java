@@ -1,7 +1,6 @@
 package dk.via.cars;
 
 import java.io.Serializable;
-import java.rmi.RemoteException;
 
 public class CarDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -16,11 +15,7 @@ public class CarDTO implements Serializable {
 		this.year = year;
 		this.price = price;
 	}
-	
-	public CarDTO(Car car) throws RemoteException {
-		this(car.getLicenseNumber(), car.getModel(), car.getYear(), car.getPrice());
-	}
-	
+
 	public String getLicenseNumber() {
 		return licenseNumber;
 	}

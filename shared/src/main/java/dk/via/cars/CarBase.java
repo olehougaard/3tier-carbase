@@ -5,8 +5,9 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 public interface CarBase extends Remote {
-	Car registerCar(String licenseNumber, String model, int year, Money price) throws RemoteException;
-	Car getCar(String licenseNumber) throws RemoteException;
-	List<Car> getAllCars() throws RemoteException;
-	void removeCar(Car car) throws RemoteException;
+	CarDTO registerCar(String licenseNumber, String model, int year, Money price) throws RemoteException;
+	void unregisterCar(CarDTO car) throws RemoteException;
+	CarDTO setPrice(CarDTO car, Money price) throws RemoteException;
+	CarDTO getCar(String licenseNumber) throws RemoteException;
+	List<CarDTO> getAllCars() throws RemoteException;
 }

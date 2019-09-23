@@ -11,23 +11,28 @@ public class RemoteCarBase implements CarBase {
 	}
 	
 	@Override
-	public Car registerCar(String licenseNumber, String model, int year, Money price) throws RemoteException {
+	public CarDTO registerCar(String licenseNumber, String model, int year, Money price) throws RemoteException {
 		return implementation.registerCar(licenseNumber, model, year, price);
 	}
 	
 
 	@Override
-	public Car getCar(String licenseNumber) throws RemoteException {
+	public CarDTO getCar(String licenseNumber) throws RemoteException {
 		return implementation.getCar(licenseNumber);
 	}
 
 	@Override
-	public List<Car> getAllCars() throws RemoteException {
+	public List<CarDTO> getAllCars() throws RemoteException {
 		return implementation.getAllCars();
 	}
 
 	@Override
-	public void removeCar(Car car) throws RemoteException {
-		implementation.removeCar(car);
+	public void unregisterCar(CarDTO car) throws RemoteException {
+		implementation.unregisterCar(car);
+	}
+
+	@Override
+	public CarDTO setPrice(CarDTO car, Money price) throws RemoteException {
+		return implementation.setPrice(car, price);
 	}
 }

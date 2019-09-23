@@ -4,42 +4,36 @@ import java.rmi.RemoteException;
 import java.util.*;
 
 public class CarBaseImplementation {
-	private Map<String, RemoteCar> cars = new HashMap<>();
 	private CarDAO dao;
 
 	public CarBaseImplementation(CarDAO dao) {
 		this.dao = dao;
 	}
 	
-	public Car registerCar(String licenseNumber, String model, int year, Money price) throws RemoteException {
+	public CarDTO registerCar(String licenseNumber, String model, int year, Money price) throws RemoteException {
 		CarDTO carDTO = dao.create(licenseNumber, model, year, price);
-		RemoteCar car = new RemoteCar(carDTO);
-		cars.put(licenseNumber, car);
-		return car;
+		return carDTO;
 	}
 	
 
-	public Car getCar(String licenseNumber) throws RemoteException {
-		if (!cars.containsKey(licenseNumber)) {
-			cars.put(licenseNumber, new RemoteCar(dao.read(licenseNumber)));
-		}
-		return cars.get(licenseNumber);
+	public CarDTO getCar(String licenseNumber) throws RemoteException {
+		return dao.read(licenseNumber);
 	}
 
-	public List<Car> getAllCars() throws RemoteException {
+
+
+	public List<CarDTO> getAllCars() throws RemoteException {
 		Collection<CarDTO> allCars = dao.readAll();
-		LinkedList<Car> list = new LinkedList<Car>();
-		for(CarDTO car: allCars) {
-			if (!cars.containsKey(car.getLicenseNumber())) {
-				cars.put(car.getLicenseNumber(), new RemoteCar(car));
-			}
-			list.add(cars.get(car.getLicenseNumber()));
-		}
-		return list;
+		return new ArrayList<>(allCars);
 	}
 
-	public void removeCar(Car car) throws RemoteException {
-		dao.delete(new CarDTO(car));
-		cars.remove(car.getLicenseNumber());
+	public void unregisterCar(CarDTO car) throws RemoteException {
+		dao.delete(car);
+	}
+
+	public CarDTO setPrice(CarDTO car, Money price) throws RemoteException{
+		CarDTO newCar = new CarDTO(car.getLicenseNumber(), car.getModel(), car.getYear(), price);
+		dao.update(newCar);
+		return newCar;
 	}
 }
