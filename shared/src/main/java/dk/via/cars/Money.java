@@ -8,6 +8,16 @@ public final class Money implements Serializable {
 	private BigDecimal amount;
 	private String currency;
 
+	public Money() {}
+
+	public void setAmount(BigDecimal amount) {
+		this.amount = amount;
+	}
+
+	public void setCurrency(String currency) {
+		this.currency = currency;
+	}
+
 	public Money(BigDecimal amount, String currency) {
 		assert amount != null && currency != null;
 		this.amount = amount;

@@ -9,6 +9,8 @@ public class CarDTO implements Serializable {
 	private int year;
 	private Money price;
 
+	public CarDTO() {}
+
 	public CarDTO(String license_number, String model, int year, Money price) {
 		this.licenseNumber = license_number;
 		this.model = model;
@@ -30,5 +32,21 @@ public class CarDTO implements Serializable {
 	
 	public Money getPrice() {
 		return price;
+	}
+
+	public void setLicenseNumber(String licenseNumber) {
+		this.licenseNumber = licenseNumber;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+	public void setYear(int year) {
+		this.year = year;
+	}
+
+	public void setPrice(Money price) {
+		this.price = price;
 	}
 }
